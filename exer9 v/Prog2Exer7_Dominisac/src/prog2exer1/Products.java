@@ -1,0 +1,1112 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package prog2exer1;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.BufferUnderflowException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.objects.AccessorPropertyDescriptor;
+
+/**
+ *
+ * @author RALPH
+ */
+    public class Products extends javax.swing.JFrame {
+        
+    int setRowCountID = 0;
+    int setRowCountID2 = 0;
+    int pidIncreSave = 1;
+    
+    int Product2DINDEX = 0;
+    int Product2DVARIETY = 0;
+    
+    int Product3DINDEX = 0;
+    int Product3DVARIETY = 0;
+    int Product3DCOLUMN = 0;
+    
+//    static int indexxer = 0;
+           
+    static String[][] ProductAllData1 = new String[10][6];
+     static String[][] ProductAllData1two = new String[10][6];
+     
+     
+    static String[][][] ProductAllData2 = new String[10][10][8]; //3D array
+    static String[][][] ProductAllData2Two = new String[10][10][8]; //3D array
+
+     int setRowCountID3 = 0;
+     
+     
+     
+     int setrowcount2 = 0;
+     int setrowcount3 = 0;
+     
+     
+     int unitPRICE;
+     static String[][] costArrray = new String[10][3];
+     static String[][] costArrraytwo = new String[10][3];
+     int costArrayINdexx = 0;
+     
+     int idProd = 0;
+     
+     static String[][] LODtwoD = new String[10][7];
+     
+     
+     
+  
+    
+    
+
+   public static String[] getPInputs(){   // 2D array that gets the values from the textfields
+        String getPID = pid.getText();
+        String getPType = ptype.getText();
+        String getPDesc = pdesc.getText();
+        String getSupplier = supplier.getText();
+        String getQuantity = quantity.getText();
+        String Orders = "0";
+        
+   
+        
+        String [] stringPinputs = {getPID, getPType, getPDesc, getSupplier, getQuantity, Orders};
+        
+        return stringPinputs;
+    }
+   
+    
+     public String [] getPInputsWithParameter(String[][] x){    // 3D array that gets the values of the getPinputs(2d array) but with added cost, date, and orders
+      // String [][][] a = new String[10][10][8];
+        String getCost = totalCost.getText();
+        Date date = Calendar.getInstance().getTime();  
+                DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");  
+                String strDate = dateFormat.format(date);  
+        
+        String zero = "0";
+        String orders = zero;
+
+     
+//        String getPID2 = x[indexxer][0];
+//        String getPType2 = x[indexxer][1];
+//        String getPDesc2 = x[indexxer][2];
+//        String getSupplier2 = x[indexxer][3];
+//        String getQuantity2 = x[indexxer][4];
+//        String getCost2 = getCost;
+//        String getDate2 = strDate;     
+//        String getOrders2 = orders;
+        
+        String getPID2 = x[setRowCountID][0];
+        String getPType2 = x[setRowCountID][1];
+        String getPDesc2 = x[setRowCountID][2];
+        String getSupplier2 = x[setRowCountID][3];
+        String getQuantity2 = x[setRowCountID][4];
+        String getCost2 = getCost;
+        String getDate2 = strDate;     
+        String getOrders2 = orders;
+ 
+ 
+        String [] stringSinputs = {getPID2, getPType2, getPDesc2, getSupplier2, getQuantity2, getCost2, getDate2, getOrders2};
+ 
+      
+        return stringSinputs;
+    }
+   
+   
+   
+   
+   /*
+    public static String [][] getPInputsWithParameter(String[][] x){    // 2D array that gets the values of the getPinputs(2d array) but with added cost, date, and orders
+        String [][] a = new String[10][8];
+        String getCost = totalCost.getText();
+        Date date = Calendar.getInstance().getTime();  
+                DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");  
+                String strDate = dateFormat.format(date);  
+        
+        String zero = "0";
+        String orders = zero;
+        
+    
+        a[0][0] = x[0][0]; 
+        a[0][1] = x[0][1];        
+        a[0][2] = x[0][2];        
+        a[0][3] = x[0][3];
+        a[0][4] = x[0][4];
+        a[0][5] = getCost;
+        a[0][6] = strDate;
+        a[0][7] = orders;
+        
+ 
+      
+        return a;
+    }
+   */
+ 
+    
+    
+    public Products() {
+        initComponents();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        pid = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        ptype = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        pdesc = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        supplier = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        quantity = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        totalCost = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        dateReceived = new javax.swing.JTextField();
+        newproductBtn = new javax.swing.JButton();
+        stockinBtn = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        addQuantity = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        firstTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        secondTable = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        plabor = new javax.swing.JTextField();
+        poverhead = new javax.swing.JTextField();
+        pdesired = new javax.swing.JTextField();
+        saveCostt = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("New Products Stock-In");
+
+        jLabel2.setText("Product ID");
+
+        jLabel3.setText("Product Type");
+
+        jLabel4.setText("Product Description");
+
+        jLabel5.setText("Supplier");
+
+        jLabel7.setText("Quantity");
+
+        jLabel8.setText("Total Cost");
+
+        jLabel9.setText("Date Received");
+
+        dateReceived.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateReceivedActionPerformed(evt);
+            }
+        });
+
+        newproductBtn.setText("New Product");
+        newproductBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newproductBtnActionPerformed(evt);
+            }
+        });
+
+        stockinBtn.setText("Stock In");
+        stockinBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockinBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("+");
+
+        firstTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "PType", "PDesc", "Supplier", "TotQuantity", "Orders"
+            }
+        ));
+        firstTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                firstTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(firstTable);
+
+        secondTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "PType", "PDesc", "Supplier", "Quantity", "Cost", "DateReceived", "Orders"
+            }
+        ));
+        secondTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                secondTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(secondTable);
+
+        jLabel11.setText("Labor Cost");
+
+        jLabel12.setText("Overhead Cost");
+
+        jLabel13.setText("Desired Profit");
+
+        plabor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                plaborActionPerformed(evt);
+            }
+        });
+        plabor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                plaborKeyReleased(evt);
+            }
+        });
+
+        poverhead.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                poverheadKeyReleased(evt);
+            }
+        });
+
+        pdesired.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pdesiredActionPerformed(evt);
+            }
+        });
+        pdesired.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pdesiredKeyReleased(evt);
+            }
+        });
+
+        saveCostt.setText("Save");
+        saveCostt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveCosttActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jLabel6))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel9)
+                                            .addComponent(newproductBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(stockinBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(addQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(totalCost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                                .addComponent(dateReceived, javax.swing.GroupLayout.Alignment.LEADING))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ptype, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(pid, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pdesc, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(saveCostt)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(pdesired, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                        .addComponent(poverhead)
+                                        .addComponent(plabor)))
+                                .addGap(52, 52, 52)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addGap(18, 18, 18))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(pid))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(ptype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(pdesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(supplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(addQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(totalCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(dateReceived, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(newproductBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stockinBtn)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(plabor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(poverhead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(pdesired, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveCostt)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(80, Short.MAX_VALUE))))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void dateReceivedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateReceivedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateReceivedActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+   
+        pid.setEditable(false);
+        dateReceived.setEditable(false);
+        readCustomerCSVProduct();
+        readCustomerCSVStocks();
+        readLODCSV();
+        
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    private void newproductBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newproductBtnActionPerformed
+     
+        DefaultTableModel tblmodel1 = (DefaultTableModel)firstTable.getModel();
+        
+        
+        pid.setText(String.valueOf(setRowCountID+1));
+
+        if(setRowCountID == 0){
+          tblmodel1.setRowCount(0);
+        }         
+          
+        String[] receivedPInputs = getPInputs(); // 1D array that call getPInputs function and stores its elements
+          
+          ///////////////////////////////////////////////////////////////////////////////////////////////
+//        String[] row = new String[receivedPInputs.length];
+        for(int a = 0; a < receivedPInputs.length; a++){     // Inserts receivedPInputs (1D array) in first table    cool   
+            ProductAllData1[setRowCountID][a] =  receivedPInputs[a];               
+        }
+        
+            tblmodel1.addRow(ProductAllData1[setRowCountID]);
+          //////////////////////////////////////////////////////////////////////////////////////////////
+           
+          
+
+       
+                   
+        String [] receivedPInputsWithParameter = getPInputsWithParameter(ProductAllData1); //calls getPInputsWithParameter and stores its values in receivedPInputsWithParameter
+      
+        for(int m = 0; m < receivedPInputsWithParameter.length; m++){  // Inserts the 2D array(receivedPInputsWithParameter) in 3D array(ProductAllData2)          
+               ProductAllData2[setRowCountID][0][m] = receivedPInputsWithParameter[m];
+        }
+        setRowCountID++;
+        
+        writeCustomerCSVProduct();
+        writeCustomerCSVStocks();
+        
+    }//GEN-LAST:event_newproductBtnActionPerformed
+ 
+    
+    public void writeCustomerCSVProduct(){  // everything in this snippet code works fine(it creates a CSV file which stores the inputs of the user)
+           try{
+             BufferedWriter bwProduct = new BufferedWriter(new FileWriter("products.csv"));
+             StringBuilder sbProduct = new StringBuilder();
+            
+              int y;
+              for(int x = 0; x <  ProductAllData1.length; x++){
+               if(ProductAllData1[x][0] != null){
+                for(y = 0; y <  ProductAllData1[0].length; y++){           
+                        sbProduct.append(ProductAllData1[x][y]);
+
+                        sbProduct.append(",");
+                   } 
+                
+                 sbProduct.append("-");  //separation for rows
+                 sbProduct.append(",");  // separation for columns
+                
+               }
+                
+                
+                
+             }
+            
+             bwProduct.write(sbProduct.toString());
+             bwProduct.close();
+            
+             }  catch (Exception ex){
+            
+            }
+       
+        }
+    
+
+    public void readCustomerCSVProduct(){  // reads the contents of the CSV file     *having issues in retaining the values
+//        String twoDProdArray[][] = new String[10][7];
+//        int read2DStringIndexProduct = 0;
+//        int newVarIndexerProduct = 0;
+        String[] fromfileProduct = {};   // 1d string for getting the columns(6 columns) of the CSV file
+        int ay = 0;
+        int by = 0;
+        
+
+          try{
+             BufferedReader brProd = new  BufferedReader(new FileReader("products.csv"));
+             String line;
+             
+              while ((line = brProd.readLine()) != null){
+                  fromfileProduct = line.split(",");  //separates the columns by a comma
+                  for(int ex = 0; ex < fromfileProduct.length; ex++){
+                      if(fromfileProduct[ex].equals("-")){
+                          ay++;
+                          by = 0;
+                          setRowCountID++;
+//                          if(ex > 0){
+//                              if(!fromfileProduct[ex - 1].equals("-")){
+//                                  idProd = idProd + 1;
+//                              }
+//                          }
+                      } else{
+                          ProductAllData1[ay][by] = fromfileProduct[ex];
+                          by++;
+                      }
+                  }
+            }
+            
+            
+            
+         } catch (Exception ex){
+            
+       }
+        
+//        for(int g = 0; g < fromfileProduct.length; g++){  
+//             if(fromfileProduct[g].equals("-")){   //if there is a presence of a dash, it increments the read2DStringINdex (row index) of the 2D array     
+//                 read2DStringIndexProduct++;
+//                 newVarIndexerProduct = 0;
+//
+//             }
+//             else{
+//                   ProductAllData1two[read2DStringIndexProduct][newVarIndexerProduct] = fromfileProduct[g];    //cust is the 2D array(declared universal) which is going to display the values to the table
+//                   newVarIndexerProduct++;
+//
+//             }
+//        }
+        
+        
+        DefaultTableModel tblmodelProd = (DefaultTableModel) firstTable.getModel();  // table
+        setrowcount2 = 0;
+
+        for(int r = 0; r < ProductAllData1.length; r++){
+            if(setrowcount2 == 0){
+               tblmodelProd.setRowCount(0);
+            }
+            try{
+            if(ProductAllData1[r][0]!= null){
+               tblmodelProd.addRow(ProductAllData1[r]);  //displays the ProductAllData1two(2D array) data to table 
+             }
+            } catch(Exception eh){
+                
+            }
+        
+               setrowcount2++; 
+       }
+
+
+       
+//        for(int h = 0; h < ProductAllData1two.length; h++){  //prints cust (2D array) , just to check what data is being stored
+//          for(int p = 0; p < ProductAllData1two[0].length; p++){
+//            System.out.println(ProductAllData1two[h][p] + ",");
+//         }
+//     }
+        
+   }
+    
+    
+    
+    
+    
+    
+
+
+    
+    private void firstTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_firstTableMouseClicked
+         
+     
+         DefaultTableModel secondTblmodel = (DefaultTableModel) secondTable.getModel();
+   
+         int[] selectPRow = firstTable.getSelectedRows();  // these all returns the values of the tables into the textfields     
+         int selectPRoww = firstTable.getSelectedRow(); 
+     
+         pid.setText(firstTable.getValueAt(selectPRow[0],0).toString());
+         ptype.setText(firstTable.getValueAt(selectPRow[0],1).toString());
+         pdesc.setText(firstTable.getValueAt(selectPRow[0],2).toString());
+         supplier.setText(firstTable.getValueAt(selectPRow[0],3).toString());
+         quantity.setText(firstTable.getValueAt(selectPRow[0],4).toString());    
+         
+        
+         
+           
+         setRowCountID2 = 0;
+         for(int x = 0; x < ProductAllData2[selectPRoww].length; x++){    //Displays 3D array(ProductAllData2) in second table           
+             if (ProductAllData2[selectPRoww][x][0] != null){
+                if(setRowCountID2 == 0){
+                    secondTblmodel.setRowCount(0);
+                }    
+                    secondTblmodel.addRow(ProductAllData2[selectPRoww][x]); //Reflects and displays the values of the selected row from the first table to the second table
+
+                    setRowCountID2++;
+
+             }          
+              
+       }
+
+      
+  
+        
+    }//GEN-LAST:event_firstTableMouseClicked
+
+    private void stockinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockinBtnActionPerformed
+        DefaultTableModel secondTblmodel = (DefaultTableModel) secondTable.getModel();
+        String getAddQuant = addQuantity.getText();
+        int[] selectFIRSTTBL = firstTable.getSelectedRows(); 
+        int selectaROW = firstTable.getSelectedRow();
+        Date date = Calendar.getInstance().getTime();  
+        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");  
+        String strDate = dateFormat.format(date); 
+          String receivedFT = firstTable.getValueAt(selectFIRSTTBL[0],4).toString();    
+        
+        
+        int getValue = Integer.parseInt(receivedFT); //from the first table
+        int addValue = Integer.parseInt(getAddQuant); //from the textfield (after + sign) 
+        
+        int totalVal = getValue + addValue;
+        
+        String displayAddedVal = Integer.toString(totalVal);
+        
+        ProductAllData1[selectaROW][4] = displayAddedVal; //overwrite quant in ProductAllData1 2D array
+
+        
+        
+        firstTable.setValueAt(displayAddedVal, selectFIRSTTBL[0], 4);  //display changes on first table
+        
+        String getPID2 = pid.getText();
+        String getPType2 = ptype.getText();
+        String getPDesc2 = pdesc.getText();
+        String getSupplier2 = supplier.getText();
+        String getQuantity2 = addQuantity.getText();
+        String getCost2 = totalCost.getText();
+        String getDate2 = strDate;     
+        String getOrders2 = "0";
+
+        String [] stringSinputs = {getPID2, getPType2, getPDesc2, getSupplier2, getQuantity2, getCost2, getDate2, getOrders2};
+        
+        int indexxer = 0;
+        for (int a = 0; a < ProductAllData2[selectaROW].length; a++){
+            if (ProductAllData2[selectaROW][a][0] == null){
+                indexxer = a;
+                break;
+            }
+        }
+        
+        for(int x = 0; x < stringSinputs.length; x++){    //Displays 3D array(ProductAllData2) in second table           
+               ProductAllData2[selectaROW][indexxer][x] = stringSinputs[x]; //Reflects and displays the values of the selected row from the first table to the second table
+        }
+        
+        setRowCountID3 = 0;
+        for (int y = 0; y < ProductAllData2[selectaROW].length; y++){
+            if (setRowCountID3 == 0){
+                secondTblmodel.setRowCount(0);
+            }
+            if (ProductAllData2[selectaROW][y][0] != null){
+                secondTblmodel.addRow(ProductAllData2[selectaROW][y]);
+            }
+            setRowCountID3++;
+        }
+        
+        
+//        writeCustomerCSVStocks();
+//        readCustomerCSVStocks();
+        writeCustomerCSVProduct();
+        writeCustomerCSVStocks();
+         
+    }//GEN-LAST:event_stockinBtnActionPerformed
+
+    
+       public void writeCustomerCSVStocks(){  // everything in this snippet code works fine(it creates a CSV file which stores the inputs of the user)
+            int getDaRoww = firstTable.getSelectedRow();
+           try{
+             BufferedWriter bwStocks = new BufferedWriter(new FileWriter("stocks.csv"));
+             StringBuilder sbStocks = new StringBuilder();
+            
+              int y;
+            for(int x = 0; x <  ProductAllData2.length; x++){
+                if(ProductAllData2[x][0][0] != null){       
+                    for(y = 0; y <  ProductAllData2[0].length; y++){
+                        if(ProductAllData2[x][y][0] != null){
+                         for(int z = 0; z < ProductAllData2[0][0].length; z++){
+                             sbStocks.append(ProductAllData2[x][y][z]);
+                             sbStocks.append(",");
+
+                          }
+                          
+
+                        }  
+                        sbStocks.append("-");
+                        sbStocks.append(",");
+                    }  
+                }
+                sbStocks.append("+");  //separation for rows
+                sbStocks.append(",");  // separation for columns
+             }            
+                bwStocks.write(sbStocks.toString());
+                bwStocks.close();
+            
+             }  catch (Exception ex){
+            
+           }
+       
+        }
+   
+
+    public void readCustomerCSVStocks(){  // reads the contents of the CSV file     *having issues in retaining the values
+        int a = 0;
+        int b = 0;
+        int c = 0;
+//        String [][][] threeDStocksArray = new String[10][10][7];  
+//        
+//        int read3DStringIndexStocks = 0;
+//        int newVarIndexerStocks = 0;
+//        int newVarIndexerStocks2 = 0;
+        String[] fromfileStocks = {};   // 1d string for getting the columns(6 columns) of the CSV file
+        
+     
+    
+          try{
+             BufferedReader brStocks = new  BufferedReader(new FileReader("stocks.csv"));
+             String line;
+             
+              while ((line = brStocks.readLine()) != null){
+              fromfileStocks = line.split(",");  //separates the columns by a comma
+              for(int x = 0; x < fromfileStocks.length; x++){
+                  if(fromfileStocks[x].equals("-")){
+                      b++;
+                      c = 0;
+                  }else if(fromfileStocks[x].equals("+")){
+                      a++;
+                      b = 0;
+                      c = 0;
+                      
+                  }
+                  else{
+                      ProductAllData2[a][b][c] = fromfileStocks[x];
+                      c++;
+                      
+                  }
+              }
+            }
+            
+            
+            
+         } catch (Exception ex){
+            
+       }
+          
+        
+//        for(int g = 0; g < fromfileStocks.length; g++){  
+//             if(fromfileStocks[g].equals("-")){   //if there is a presence of a dash, it increments the read2DStringINdex (row index) of the 2D array     
+//                 read3DStringIndexStocks++;
+//                 newVarIndexerStocks = 0;
+//                 newVarIndexerStocks2 = 0;
+//
+//             }
+//             else{
+//                   ProductAllData2Two[read3DStringIndexStocks][newVarIndexerStocks][newVarIndexerStocks2] = fromfileStocks[g];    //cust is the 2D array(declared universal) which is going to display the values to the table
+//                   newVarIndexerStocks++;
+//                   newVarIndexerStocks2++;
+//                   
+//
+//             }
+//        }
+        
+        
+//        DefaultTableModel tblmodelStocks = (DefaultTableModel) secondTable.getModel();  // table
+//        setrowcount3 = 0;
+//      
+//
+//        for(int r = 0; r < ProductAllData2Two.length; r++){
+//            for(int s = 0; s < ProductAllData2Two[0].length; s++){
+//               if(setrowcount3 == 0){
+//                  tblmodelStocks.setRowCount(0);
+//               }
+//               try{                
+//                if(ProductAllData2Two[r][s][0].equals("null") == false){  
+//                    tblmodelStocks.addRow(ProductAllData2Two[r][s]);  //displays the cust(2D array) data to table 
+//                  
+//                  }
+//              }catch(Exception e){
+//                
+//                }
+//        
+//                  setrowcount3++; 
+//              }      
+//          }
+
+
+        
+//        
+//        for(int h = 0; h < ProductAllData2Two.length; h++){  //prints cust (2D array) , just to check what data is being stored
+//          for(int p = 0; p < ProductAllData2Two[0].length; p++){
+//            System.out.println(ProductAllData2Two[h][p] + ",");
+//         }
+//     }
+        
+   }
+    
+    
+
+    
+ 
+    
+
+    
+    
+    public int calculateUnitPrice(){
+        int selectSRow = secondTable.getSelectedRow();
+        int UnitPrice;
+        int partial;
+//        System.out.println("1");
+        partial = Integer.parseInt(secondTable.getValueAt(selectSRow, 5).toString()) / Integer.parseInt(secondTable.getValueAt(selectSRow, 4).toString());
+//        System.out.println("2");
+        int intLabor = Integer.parseInt(plabor.getText());
+        int intOverhead = Integer.parseInt(poverhead.getText());
+        int intDesired = Integer.parseInt(pdesired.getText());
+        UnitPrice = partial + intLabor + intOverhead + intDesired;
+ 
+        return UnitPrice;   
+
+    }
+    
+    public String getProductType(){
+        int selectSRow = secondTable.getSelectedRow();
+        String prodtype = secondTable.getValueAt(selectSRow, 1).toString();
+        
+        return prodtype;    
+    }
+    public String getProductDescription(){
+        int selectSRow = secondTable.getSelectedRow();
+        String proddesc = secondTable.getValueAt(selectSRow, 2).toString();
+        
+        return proddesc;
+    }    
+    
+    public void updateTableValues(){
+        int selectPRow = firstTable.getSelectedRow();
+        int selectSRow = secondTable.getSelectedRow();
+        ProductAllData1[selectPRow][4] = String.valueOf(Integer.parseInt(ProductAllData1[selectPRow][4])-1);
+        ProductAllData1[selectPRow][5] = String.valueOf(Integer.parseInt(ProductAllData1[selectPRow][5])+1);
+        ProductAllData2[selectPRow][selectSRow][4] = String.valueOf(Integer.parseInt(ProductAllData2[selectPRow][selectSRow][4])-1);
+        ProductAllData2[selectPRow][selectSRow][7] = String.valueOf(Integer.parseInt(ProductAllData2[selectPRow][selectSRow][7])+1);
+        firstTable.setValueAt(ProductAllData1[selectPRow][4], selectPRow, 4);
+        firstTable.setValueAt(ProductAllData1[selectPRow][5], selectPRow, 5);
+        secondTable.setValueAt(ProductAllData2[selectSRow][selectPRow][4], selectSRow, 4);
+        secondTable.setValueAt(ProductAllData2[selectSRow][selectPRow][7], selectSRow, 7);
+        
+    }
+    
+    public void writeLODCSV(){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("LOD.csv"));
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(plabor.getText());
+            sb.append(",");
+            sb.append(poverhead.getText());
+            sb.append(",");
+            sb.append(pdesired.getText());
+           
+            
+            bw.write(sb.toString());
+            bw.close();
+            
+      
+        }catch(Exception d){
+  
+        }
+        
+ 
+    }
+    
+    public void readLODCSV(){
+        
+        String[] fromfile = {};
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("LOD.csv"));
+            String line;
+            
+            while((line = br.readLine()) != null){
+                
+                fromfile = line.split(",");
+                plabor.setText(fromfile[0]);
+                poverhead.setText(fromfile[1]);
+                pdesired.setText(fromfile[2]);
+                
+                
+            }
+            
+      
+        } catch(Exception n ){
+            
+        }
+        
+        
+//        for(int g = 0; g < fromfile.length; g++){
+//            if(fromfile[g].equals("-")){
+//                readIndexerr++;
+//                newVaryIndexxer = 0;
+//                
+//            }
+//            else{
+//                LODtwoD[readIndexerr][newVaryIndexxer] = fromfile[g];
+//                // try to find a way how to disseminate the values in calculating the price in customerForm
+//                
+//            }
+//        }
+ 
+        
+    }
+    
+    
+    
+    
+
+    
+    
+    private void plaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plaborActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_plaborActionPerformed
+
+    private void pdesiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdesiredActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pdesiredActionPerformed
+
+    private void secondTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_secondTableMouseClicked
+        // TODO add your handling code here:
+
+        
+    }//GEN-LAST:event_secondTableMouseClicked
+
+    
+    
+    
+    
+   
+    private void saveCosttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCosttActionPerformed
+  //   writeCustomerCSVCost();
+  //   readCustomerCSVCost();
+     
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_saveCosttActionPerformed
+
+    private void plaborKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_plaborKeyReleased
+
+        writeLODCSV();
+    }//GEN-LAST:event_plaborKeyReleased
+
+    private void poverheadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_poverheadKeyReleased
+
+        writeLODCSV();
+    }//GEN-LAST:event_poverheadKeyReleased
+
+    private void pdesiredKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pdesiredKeyReleased
+
+        writeLODCSV();
+    }//GEN-LAST:event_pdesiredKeyReleased
+
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Products().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField addQuantity;
+    public static javax.swing.JTextField dateReceived;
+    public static javax.swing.JTable firstTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton newproductBtn;
+    public static javax.swing.JTextField pdesc;
+    public static javax.swing.JTextField pdesired;
+    public static javax.swing.JTextField pid;
+    public static javax.swing.JTextField plabor;
+    public static javax.swing.JTextField poverhead;
+    public static javax.swing.JTextField ptype;
+    public static javax.swing.JTextField quantity;
+    private javax.swing.JButton saveCostt;
+    public static javax.swing.JTable secondTable;
+    private javax.swing.JButton stockinBtn;
+    public static javax.swing.JTextField supplier;
+    public static javax.swing.JTextField totalCost;
+    // End of variables declaration//GEN-END:variables
+}
