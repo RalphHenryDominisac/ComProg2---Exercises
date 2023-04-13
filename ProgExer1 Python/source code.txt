@@ -1,0 +1,104 @@
+from tkinter import *
+from tkinter import messagebox
+
+at = False
+dotcom = False
+
+
+
+def save():
+    msgbox("Save Record!!", "Record")
+
+def keyup(e):   #Checks the validity of the Customer e-mail
+    global at
+    global dotcom
+    for x in range(len(custemail.get())):
+        if custemail.get()[-1] == "@" and x > 1:
+            at = True
+        else:
+            labelemail.config(text = "Bad e-mail")
+
+        if x > 4 and custemail.get()[-4:] == ".com" and at == True:
+            dotcom = True
+        else:
+            labelemail.config(text = "Bad e-mail")
+
+
+        if at == True and dotcom == True and x > 4:
+            labelemail.config(text = "Good e-mail")
+
+        
+
+
+def msgbox(msg, titlebar):
+    messagebox.showinfo(title = titlebar, message = msg)
+
+
+def products():
+    window = Tk()
+    window.title("Products Form")
+    window.geometry("550x400")
+    window.configure(bg = "orange")
+    
+
+
+window = Tk()    # The main GUI form
+window.title("Sample Window")
+window.geometry("550x400")
+window.configure(bg = "orange")
+
+
+menubar = Menu(window)   #Creates a MenuBar (upper left)
+filemenu = Menu(menubar, tearoff = 0)
+menubar.add_cascade(label = "File", menu = filemenu) #File menubar
+filemenu.add_command(label = "Products", command = products)
+filemenu.add_command(label = "Orders")
+filemenu.add_separator()
+filemenu.add_command(label = "Close", command = window.quit)
+
+window.config(menu = menubar) #Activates the menu bar
+
+
+
+
+
+
+
+
+
+label = Label(window, text = "Customer Registration System", width = 30, height = 1, bg = "yellow")
+label.config(font=("Courier",10))
+label.grid(column = 2, row = 1)
+
+
+label = Label(window, text = "Customer ID:", width = 10, height = 1, bg = "yellow") # Customer ID label
+label.grid(column = 1, row = 2) #Position of Customer ID label
+cid = StringVar()
+custid = Entry(window, textvariable = cid, state = 'disabled')   #Customer ID Textfield
+custid.grid(column = 2, row = 2) #Position of Customer ID Textfield
+cid.set("1")
+
+
+label = Label(window, text = "Customer name:", width = 15, height = 1, bg = "yellow") #Customer name label
+label.grid(column = 1, row = 3) #Position of Customer name label
+label = Label(window, text = "Lastname, Firstname", width = 20, height = 1, bg = "yellow")  #Customer name label instruction
+label.grid(column = 3, row = 3)
+custname = Entry(window) #Customer name Textfield
+custname.grid(column = 2, row = 3)
+
+
+label = Label(window, text = "Customer E-mail:", width = 15, height = 1, bg = "yellow")  #Customer E-mail label
+label.grid(column = 1, row = 4)
+labelemail = Label(window, text = "[a-z] @ [a-z].com", width = 15, height = 1, bg = "yellow") #Customer E-mail label instruction
+labelemail.grid(column = 3, row = 4)
+custemail = Entry(window)  #Customer E-mail Textfield
+custemail.grid(column = 2, row = 4)
+custemail.bind("<KeyRelease>", keyup)
+
+
+savebtn = Button(text = "Save", command = save)
+savebtn.grid(column = 1, row = 5)
+
+
+window.mainloop()  
+
